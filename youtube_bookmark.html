@@ -3,10 +3,30 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Youtube Bookmark App</title>
-		<link rel="stylesheet" type="text/css" href="">
+		<link rel="stylesheet" type="text/css" href="style.css">
 		<script src="youtube_bookmark.js"></script>
+		<script src="https://apis.google.com/js/client.js?onload=onClientLoad" type="text/javascript"></script>
 	</head>
 	<body>
 		<h1>Bookmark Your Favorite Youtube Searches</h1>
+		<p id="welcomeMessage"></p>
+
+		<form action="#"> 
+			<p>
+				<input type="text" id="queryInput" placeholder="Enter Youtube search query">
+			</p>
+			<p>
+				<input type="text" id="tagQuery" placeholder="Tag your query">
+				<input type="button" id="saveButton" value="Save">
+				<input type="button" id="clearButton" value="Clear all Saved Searches">
+			</p>
+		</form>
+
+		<h1>Previously Bookmarked Searches</h1>
+		<div id="searches"></div>
+
+		<h1 id="search-data">Search Data</h1>
+		<div id="bookmark-search-results"></div>
+		
 	</body>
 </html>
