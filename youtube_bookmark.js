@@ -9,12 +9,13 @@
 
 // 1.
 // user can enter in a search query and a bookmark name
-// -app will return both a list of youtube videos that match that search 
+// -app will return both a list of youtube videos that match that search
+// -search term should be linked to youtube search & hyperlinked in bkmrk list 
 // (XXXRemove from ScopeXXX)---list will be capped at a certain number...say top 10
 // (DONE!!) -app will add that bookmark to the running list of bookmarks
 
 // 2.
-// user can delete any bookmark from the list
+// (DONE!!) user can delete any bookmark from the list
 
 // 3.
 // (DONE!!) user can delete all of the bookmarks
@@ -78,6 +79,14 @@ function displayBookmarks()
 
 	document.getElementById("bookmarks").innerHTML = table;
 }//end function displayBookmarks
+
+function deleteBookmark(key)
+{
+	localStorage.removeItem(key);
+
+	//show updated list w/out bookmark you just deleted
+	displayBookmarks();
+}//end function deleteBookmark
 
 function clearBookmarks()
 {
