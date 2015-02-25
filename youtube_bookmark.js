@@ -27,7 +27,7 @@
 // (XXXRemove from ScopeXXX)user can edit the name of a bookmark in the running list of bookmarks
 
 // 6.
-// fix up the styles
+// (DONE!!) fix up the styles
 
 
 ///----------End Planning Section----------------------
@@ -59,11 +59,18 @@ function displayBookmarks()
 		all_bookmarks[i] =  localStorage.key(i);
 	}//end for
 
-	var table = "<table>" + 
-								"<tr class='head'>" +
-								"<th>Bookmark</th>" +
-								"<th>Delete</th>" +
-								"</tr>";
+	var table = "<div class='panel panel-info'>" +
+								"<div class='panel-heading'>" +
+    							"<h3 class='panel-title'>Saved Bookmarks</h3>" +
+    						"</div>" +
+
+								"<div class='panel-body'>"	+
+									"<button id='clearButton'" + 
+    								"class='btn btn-danger pull-right'" +
+    							 	"type='submit'>Clear All Bookmarks</button>" +
+
+									"<table class='table'>";
+  
 
 	for(bookmark in all_bookmarks)
 	{
@@ -71,13 +78,16 @@ function displayBookmarks()
 							"<th>" + all_bookmarks[bookmark] + "</th>" +
 							"<td><input type='button' value='Delete'" +
 							"id='" + all_bookmarks[bookmark] + "'" +
-							"onclick='deleteBookmark(id)'></td>" +
+							"onclick='deleteBookmark(id)' class='btn btn-danger pull-right'></td>" +
 						"</tr>";
 	} //end for
 
-	table += "</table>";
+	table += "</table></div></div>";
 
 	document.getElementById("bookmarks").innerHTML = table;
+
+	document.getElementById("clearButton").addEventListener(
+		"click", clearBookmarks,false);
 }//end function displayBookmarks
 
 function deleteBookmark(key)
@@ -101,9 +111,6 @@ function start()
 
 	document.getElementById("saveButton").addEventListener(
 		"click",saveBookmark,false);
-
-	document.getElementById("clearButton").addEventListener(
-		"click", clearBookmarks,false);
 
 	displayBookmarks();
 }//end function start
