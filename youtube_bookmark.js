@@ -37,6 +37,41 @@
 //global variables
 var all_bookmarks;		//array to hold bookmarks the user creates
 
+//--------Start Youtube API Code-----------------------
+
+// Helper function to display JavaScript value on HTML page.
+function showResponse(response) {
+    var responseString = JSON.stringify(response, '', 2);
+    document.getElementById('bookmark-search-results').innerHTML += responseString;
+}
+
+function onClientLoad() {
+    gapi.client.load('youtube', 'v3', onYouTubeApiLoad);
+}
+
+
+function onYouTubeApiLoad() {
+    gapi.client.setApiKey('AIzaSyB_W0TwsWSpJDba1Tm9eXOk20VSXGIACWw');
+}
+
+function search(query) {
+    // Use the JavaScript client library to create a search.list() API call.
+    var request = gapi.client.youtube.search.list({
+        part: 'snippet',
+        'q': query
+    });
+    
+    // Send the request to the API server,
+    // and invoke onSearchRepsonse() with the response.
+    request.execute(onSearchResponse);
+}
+
+function onSearchResponse(response) {
+    showResponse(response);
+}
+
+//--------End Youtube API Code-----------------------
+
 //save bookmark to local storage and display bookmarks in list on html page
 function saveBookmark()
 {
@@ -46,8 +81,11 @@ function saveBookmark()
 
 	localStorage.setItem(bookmark.value, query.value);
 
+	search(query.value);
+
 	displayBookmarks();
 }//end function saveBookmark
+
 
 function displayBookmarks()
 {
